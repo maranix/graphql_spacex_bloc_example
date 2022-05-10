@@ -10,5 +10,5 @@ void main() async {
 
   final rockets = await _gqlRepository.getRockets();
 
-  print(rockets?.rockets);
+  print(rockets);
 }

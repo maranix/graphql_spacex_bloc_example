@@ -7,11 +7,11 @@ class SpaceXGraphQLRepository {
 
   final GraphQLClient _client;
 
-  Future<QueryFetchRockets?> getRockets() async {
+  Future<List<QueryFetchRockets$rockets?>?> getRockets() async {
     final data = await _client.queryFetchRockets();
 
     if (!data.hasException) {
-      return data.parsedData;
+      return data.parsedData?.rockets;
     } else {
       throw '${data.exception?.linkException}';
     }
