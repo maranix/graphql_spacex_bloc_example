@@ -1,12 +1,31 @@
 part of 'home_bloc.dart';
 
-enum HomeStatus { unknown, loading, loaded, error }
+enum HomeStatus { initial, loaded, error }
 
-abstract class HomeState extends Equatable {
-  const HomeState();
-}
+class HomeState extends Equatable {
+  const HomeState({
+    this.status = HomeStatus.initial,
+    this.rockets = const <QueryFetchRockets$rockets?>[],
+  });
 
-class HomeInitial extends HomeState {
+  final HomeStatus status;
+  final List<QueryFetchRockets$rockets?> rockets;
+
+  HomeState copyWith({
+    HomeStatus? status,
+    List<QueryFetchRockets$rockets?>? rockets,
+  }) {
+    return HomeState(
+      status: status ?? this.status,
+      rockets: rockets ?? this.rockets,
+    );
+  }
+
   @override
-  List<Object> get props => [];
+  String toString() {
+    return '''PostState { status: $status, rockets: ${rockets.length} }''';
+  }
+
+  @override
+  List<Object> get props => [status, rockets];
 }
